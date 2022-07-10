@@ -1,9 +1,0 @@
-C:\Users\18296\source\repos\CursoMVC\CapaDatos\bin\Debug\CapaDatos.dll
-C:\Users\18296\source\repos\CursoMVC\CapaDatos\bin\Debug\CapaDatos.pdb
-C:\Users\18296\source\repos\CursoMVC\CapaDatos\obj\Debug\CapaDatos.csproj.AssemblyReference.cache
-C:\Users\18296\source\repos\CursoMVC\CapaDatos\obj\Debug\CapaDatos.csproj.CoreCompileInputs.cache
-C:\Users\18296\source\repos\CursoMVC\CapaDatos\obj\Debug\CapaDatos.dll
-C:\Users\18296\source\repos\CursoMVC\CapaDatos\obj\Debug\CapaDatos.pdb
-C:\Users\18296\source\repos\CursoMVC\CapaDatos\bin\Debug\CapaEntidad.dll
-C:\Users\18296\source\repos\CursoMVC\CapaDatos\bin\Debug\CapaEntidad.pdb
-C:\Users\18296\source\repos\CursoMVC\CapaDatos\obj\Debug\CapaDatos.csproj.CopyComplete
