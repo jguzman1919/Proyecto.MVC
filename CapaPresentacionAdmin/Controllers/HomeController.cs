@@ -8,7 +8,7 @@ using CapaNegocio;
 
 namespace CapaPresentacionAdmin.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
@@ -48,6 +48,33 @@ namespace CapaPresentacionAdmin.Controllers
 
             }
                 return Json(new {resultado = resultado,mensaje = mensaje}, JsonRequestBehavior.AllowGet);
+        }
+
+        //DEMO: implemetando codigo limpio
+        [HttpPost]
+        public JsonResult UserSave(Usuario Request)
+        {
+            string messageError = new CN_Usuarios().Create(Request);
+            return ResponseJson(messageError, Request.IdUsuario);
+        }
+
+        [HttpPost]
+        public JsonResult UserUpdate(Usuario Request)
+        {
+            string resultado = new CN_Usuarios().Update(Request);
+            return ResponseJson(resultado, Request.IdUsuario);
+        }
+
+
+        [HttpPost]
+        public JsonResult EliminarUsuario(int id)
+        {
+
+            bool respuesta = false;
+            string mensaje = string.Empty;
+
+            respuesta = new CN_Usuarios().Eliminar(id, out mensaje);
+            return Json(new {resultado = respuesta,mensaje = mensaje},JsonRequestBehavior.AllowGet);
         }
     }
 }
