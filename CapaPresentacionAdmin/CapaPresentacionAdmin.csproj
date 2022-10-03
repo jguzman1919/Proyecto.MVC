@@ -122,7 +122,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\httpPostedfileBase.cs" />
     <Compile Include="Controllers\MantenedorController.cs" />
+    <Compile Include="Controllers\ruta_guardar.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -487,8 +489,8 @@
     <Content Include="webfonts\fa-brands-400.eot" />
     <Content Include="Views\Home\Usuarios.cshtml" />
     <Content Include="Views\Mantenedor\Categorias.cshtml" />
-    <Content Include="Views\Mantenedor\Marca.cshtml" />
     <Content Include="Views\Mantenedor\Producto.cshtml" />
+    <Content Include="Views\Shared\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

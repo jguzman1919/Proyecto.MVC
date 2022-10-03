@@ -1,0 +1,80 @@
+﻿
+
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Usuario</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <input id="txtid" type="text" value="0" />
+
+                <div class"row g-2">                    
+
+                    <div class="col-sm-6">
+                        <label for="description" class="form-label">Descripcion</label>
+                        <input type="text" class="form-control" id="description" autocomplete="off">
+
+                    </div>
+                   
+                    <div class="col-sm-6">
+                        <label for="cboactivo" class="form-label">Activo</label>
+
+                        <select id="cboactivo" class="form-select">
+                            <option selected>Open this select menu</option>
+                            <option value="1">Si</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row mt-2">
+
+                <div class="col-12">
+
+                    <div id="mensajeError" class="alert alert-danger" role="alert">
+                        A simple danger alert—check it out!
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>               
+                <button type="button" class="btn btn-primary" id="btnSave">Crear Usuario</button>
+                <button type="button" class="btn btn-primary" id="btnEditar">Editar Usuario</button>
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/admin/Marca/Marca.js" type="module"></script>
+<script>
+    function abrirModal(json) {
+
+        $("#txtid").val(0);
+        $("#description").val("");
+        $("#txtcboactivo").val(1);
+
+        $("#mensajeError").hide();
+
+        if (json != null) {
+
+            $("#txtid").val(json.IdUsuario);
+            $("#description").val(json.description);
+            $("#txtapellidos").val(json.Apellidos);
+            $("#txtcorreo").val(json.Correo);
+            $("#txtcboactivo").val(json.Activo == true ? 1 : 0);
+        }
+
+        $("#FormModal").modal("show");
+    }
+</script>

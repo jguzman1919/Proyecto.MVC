@@ -27,7 +27,7 @@ namespace CapaPresentacionAdmin.Controllers
 
             oLista = new CN_Usuarios().Listar();
 
-            return Json(new{ data = oLista},JsonRequestBehavior.AllowGet);
+            return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public JsonResult GuardarUsuario(Usuario objeto)
@@ -36,7 +36,7 @@ namespace CapaPresentacionAdmin.Controllers
             object resultado;
             string mensaje = string.Empty;
 
-            if  (objeto.IdUsuario == 0)
+            if (objeto.IdUsuario == 0)
             {
 
                 resultado = new CN_Usuarios().Registrar(objeto, out mensaje);
@@ -47,7 +47,7 @@ namespace CapaPresentacionAdmin.Controllers
                 resultado = new CN_Usuarios().Editar(objeto, out mensaje);
 
             }
-                return Json(new {resultado = resultado,mensaje = mensaje}, JsonRequestBehavior.AllowGet);
+            return Json(new { resultado = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
 
         //DEMO: implemetando codigo limpio
@@ -74,7 +74,7 @@ namespace CapaPresentacionAdmin.Controllers
             string mensaje = string.Empty;
 
             respuesta = new CN_Usuarios().Eliminar(id, out mensaje);
-            return Json(new {resultado = respuesta,mensaje = mensaje},JsonRequestBehavior.AllowGet);
+            return Json(new { resultado = respuesta, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
     }
 }

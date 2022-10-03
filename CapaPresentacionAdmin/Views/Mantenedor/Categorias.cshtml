@@ -4,15 +4,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <ol class="breadcrumb mb-4 mt-4">
     <li class="breadcrumb-item"><a href="index.html">Mantenimiento</a></li>
-    <li class="breadcrumb-item active">Categorias</li>
+    <li class="breadcrumb-item active">Categoria</li>
 </ol>
 
 <div class="card">
     <div class="card-header">
 
-        <i class="fas fa-users me-1"></i> Lista de Categorias
+        <i class="fas fa-users me-1"></i> Lista de Categoria
     </div>
     <div class="card-body">
         <div class="row">
@@ -30,7 +31,7 @@
         <table id="tabla" class="display cell-border" style="width: 100%">
             <thead>
                 <tr>
-                    
+
                     <th>Descripcion</th>
                     <th>Activo</th>
                     <th></th>
@@ -56,7 +57,6 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
                 <input id="txtid" type="text" value="0" />
 
                 <div class"row g-1">
@@ -64,7 +64,7 @@
 
                     <div class="col-sm-6">
                         <label for="txtdescripcion" class="form-label">Descripcion</label>
-                        <input type="text" class="form-control" id="txtcorreo" autocomplete="off">
+                        <input type="text" class="form-control" id="txtdescripcion" autocomplete="off">
 
                     </div>
 
@@ -124,7 +124,7 @@
                 dataType: "json"
             },
             "columns":[
-                 
+
                  { "data": "Descripcion" },
                 {
                     "data": "Activo", "render": function (valor)  {
@@ -161,19 +161,15 @@
         function abrirModal(json) {
 
             $("#txtid").val(0);
-            $("#txtnombres").val("");
-            $("#txtapellidos").val("");
-            $("#txtcorreo").val("");
+            $("#txtdescrpcion").val("");
             $("#txtcboactivo").val(1);
 
             $("#mensajeError").hide();
 
             if (json != null) {
 
-                $("#txtid").val(json.IdUsuario);
-                $("#txtnombres").val(json.Nombres);
-                $("#txtapellidos").val(json.Apellidos);
-                $("#txtcorreo").val(json.Correo);
+                $("#txtid").val(json.IdCategoria);
+                $("#txtdescripcion").val(json.Descripcion);
                 $("#txtcboactivo").val(json.Activo == true ? 1 : 0);
             }
 
@@ -194,13 +190,13 @@
 
         $("#tabla tbody").on("click", '.btn-eliminar', function () {
 
-            usuarioSeleccionado = $(this).closest("tr");
+            categoriaSeleccionada = $(this).closest("tr");
 
-            var data = tabladata.row(usuarioSeleccionado).data();
+            var data = tabladata.row(categoriaSeleccionada).data();
 
             swal({
                 title: "Esta seguro?",
-                text: "Desea eliminar el usuario!",
+                text: "Desea eliminar la Categoria!",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonClass: "btn-primary",
@@ -211,9 +207,9 @@
                function () {
 
                   jQuery.ajax({
-                    url: '@Url.Action("EliminarUsuario", "Home")',
+                    url: '@Url.Action("EliminarCategoria", "Mantenedor")',
                     type: "post",
-                      data: JSON.stringify({ id: data.IdCategorias }),
+                      data: JSON.stringify({ id: data.IdCategoria }),
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     success: function (data) {
@@ -221,7 +217,7 @@
 
                             if (data.resultado) {
 
-                                tabladata.row(usuarioSeleccionado).remove().draw();
+                                tabladata.row(categoriaSeleccionada).remove().draw();
                             }
 
                             else
@@ -240,33 +236,33 @@
 
         function Guardar() {
 
-            var Usuario = {
+            var Categoria = {
 
-                IdUsuario: $("#txtid").val(),
-                Nombres: $("#txtnombres").val(),
-                Apellidos: $("#txtapellidos").val(),
-                Correo: $("#txtcorreo").val(),
-                Activo: $("#cboactivo").val() == 1 ? true: false,
+                IdCategoria: $("#txtid").val(),
+                Descripcion: $("#txtdescripcion").val(),
+                Activo: $("#cboactivo").val() == 1 ? true : false,
+
+
 
             }
 
             jQuery.ajax({
-                url: '@Url.Action("GuardarUsuario", "Mantenedor")',
+                url: '@Url.Action("GuardarCategoria", "Mantenedor")',
                 type: "post",
-                data: JSON.stringify({ objeto: Usuario }),
+                data: JSON.stringify({ objeto: Categoria }),
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     $(".modal-body").LoadingOverlay("hide");
 
                     debugger;
-                    //usuario nuevo
-                    if (Usuario.IdCategorias == 0) {
+                    //Categoria nueva
+                    if (Categoria.IdCategoria == 0) {
 
                         if (data.resultado != 0) {
 
-                            Usuario.IdCategorias = data.resultado;
-                            tabladata.row.add(Usuario).draw(false);
+                            Categoria.IdCategoria = data.resultado;
+                            tabladata.row.add(Categoria).draw(false);
                             $("#FormModal").modal("hide");
                         }
 
@@ -277,12 +273,12 @@
 
                     }
 
-                    //Usuario Editar
+                    //CategoriaEditar
                     else {
 
                         if (data.resultado) {
 
-                            tabladata.row(filaSeleccionada).data(Usuario).draw(false);
+                            tabladata.row(filaSeleccionada).data(Categoria).draw(false);
                             filaSeleccionada = null;
                             $("#FormModal").modal("hide");
                         }
@@ -291,7 +287,6 @@
                             $("#mensajeError").text(data.mensaje);
                             $("#mensajeError").show();
                         }
-
 
                     }
 
