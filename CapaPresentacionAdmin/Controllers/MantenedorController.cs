@@ -215,7 +215,6 @@ namespace CapaPresentacionAdmin.Controllers
         [HttpPost]
         public JsonResult ImagenProducto(int id)
         {
-
             bool convension;
             Producto oproducto = new CN_Producto().Listar().Where(p => p.IdProducto == id).FirstOrDefault();
 
@@ -225,14 +224,10 @@ namespace CapaPresentacionAdmin.Controllers
                 convension = convension,
                 textoBase64 = textoBase64,
             extension = Path.GetExtension(oproducto.NombreImagen)
-
-
             },
             JsonRequestBehavior.AllowGet
             );
         }
-
-
         [HttpPost]
         public JsonResult EliminarProducto(int id)
         {
